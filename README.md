@@ -1,19 +1,139 @@
-# FinAI Budget Planning Agent
+# 🚀 FinAI – AI-Powered Budget Planning Agent
 
-FinAI is a full-stack, intelligent budget planning agent that helps users set up, analyze, and manage monthly/yearly budgets using a conversational interface and a visual dashboard. 
+> **"Plan Smarter. Save Better. Grow Faster."**
 
-The application offers two stack architectures:
-1. **Node.js Stack (Option A):** A unified Node.js/Express server that serves both the static frontend assets and the backend REST API (storing data in a local `db.json` database).
-2. **Split Stack (Option B):** A Python FastAPI REST API server coupled with an Nginx reverse proxy serving the static frontend files and proxying API endpoints to FastAPI.
+FinAI is an intelligent personal finance assistant that transforms budgeting into an interactive conversation. Instead of manually tracking expenses in spreadsheets, users simply chat with FinAI to create budgets, analyze spending habits, receive AI-powered financial insights, and achieve their savings goals.
 
 ---
 
-## Prerequisites
-Ensure you have the following installed on your machine:
-- [Docker](https://www.docker.com/) (Version 20.10+ recommended)
-- [Docker Compose](https://docs.docker.com/compose/)
+## 🌟 Why FinAI?
+
+Managing personal finances can be overwhelming. FinAI simplifies this process by combining Artificial Intelligence, data visualization, and personalized recommendations into one seamless platform.
+
+Whether you're a student, working professional, or freelancer, FinAI helps you make informed financial decisions.
 
 ---
+
+## ✨ Core Features
+
+* 🤖 AI Financial Assistant
+* 💬 Conversational Budget Planning
+* 📊 Interactive Dashboard
+* 💸 Expense Categorization
+* 🎯 Savings Goal Tracker
+* 📈 Monthly & Yearly Reports
+* 🧠 Smart Spending Insights
+* 📂 Persistent Data Storage
+* 🔒 Secure Authentication Ready
+* 📱 Responsive Design
+
+---
+
+# 🏗 Architecture
+
+```text
+                User
+                  │
+        ┌─────────▼─────────┐
+        │  HTML • CSS • JS  │
+        └─────────┬─────────┘
+                  │
+         REST API Requests
+                  │
+      ┌───────────▼───────────┐
+      │ Node.js / FastAPI API │
+      └───────────┬───────────┘
+                  │
+        Gemini AI Integration
+                  │
+      ┌───────────▼───────────┐
+      │ Budget Recommendation │
+      └───────────┬───────────┘
+                  │
+      JSON / MongoDB / Firebase
+```
+
+---
+
+# 💻 Technology Stack
+
+| Layer           | Technology                          |
+| --------------- | ----------------------------------- |
+| Frontend        | HTML5, CSS3, JavaScript             |
+| Backend         | Node.js, Express.js, Python FastAPI |
+| AI              | Google Gemini API                   |
+| Database        | JSON, MongoDB, Firebase             |
+| Deployment      | Docker, Docker Compose, Nginx       |
+| Version Control | Git & GitHub                        |
+
+---
+
+# 📂 Project Structure
+
+```text
+FinAI
+│
+├── backend/
+├── public/
+├── nginx/
+├── Dockerfile
+├── docker-compose.yml
+├── db.json
+└── README.md
+```
+
+---
+
+# 🚀 Quick Start
+
+### Run with Docker
+
+```bash
+docker compose up --build
+```
+
+Open:
+
+```text
+http://localhost:8080
+```
+
+---
+
+# 📊 What FinAI Can Do
+
+✅ Create personalized budgets
+
+✅ Analyze income vs expenses
+
+✅ Recommend monthly savings
+
+✅ Detect unnecessary spending
+
+✅ Track financial goals
+
+✅ Generate yearly budget reports
+
+✅ Answer finance questions using AI
+
+---
+
+# 📈 Future Roadmap
+
+* 📄 PDF Budget Reports
+* 🏦 Bank API Integration
+* 📷 Bill & Receipt Scanner
+* 📱 Android/iOS App
+* 📊 Investment Portfolio Tracking
+* 🌍 Multi-Currency Support
+* 🔔 Smart Spending Alerts
+
+## ⭐ Support
+
+If you found this project useful, please ⭐ the repository and contribute by opening issues or submitting pull requests.
+
+Together, let's make financial planning smarter with AI.
+
 
 ## Project Structure
 ```text
@@ -38,63 +158,6 @@ Ensure you have the following installed on your machine:
 ```
 
 ---
-
-## Configuration (`.env`)
-
-Create or update the `.env` file in the root directory. This file will be read by both Docker Compose setups:
-
-```env
-PORT=8080
-JWT_SECRET=finai-secure-token-secret-key-99887766
-GEMINI_API_KEY=your_gemini_api_key_here
-# Optional Python specific DB variables:
-# MONGODB_URI=your_mongodb_connection_string
-# FIREBASE_CREDENTIALS_JSON=path_to_firebase_creds_inside_container
-```
-
-*Note: If `GEMINI_API_KEY` is not provided, the application will gracefully fall back to a local intelligent rule-based chat engine.*
-
----
-
-## Option A: Run Node.js Full-Stack App (Default)
-
-This option spins up the single Node.js container hosting both the Express API and frontend.
-
-### 1. Build and Run
-To start the Node.js application, run:
-```bash
-docker compose up -d node-app
-```
-
-### 2. Access the Application
-Open your browser and navigate to:
-- **Frontend & API:** [http://localhost:8080](http://localhost:8080)
-
-### 3. Database Persistence
-The application uses local database storage in `db.json`. The `docker-compose.yml` file is configured with a bind mount (`./db.json:/app/db.json`), which syncs any updates made inside the container directly to your host machine.
-
----
-
-## Option B: Run Split Stack (Python FastAPI + Nginx)
-
-This option spins up the FastAPI API container and Nginx container. Nginx serves the frontend files and routes API requests to the Python container.
-
-### 1. Build and Run
-To start the Python and Nginx services, run:
-```bash
-docker compose up -d nginx-frontend api-python
-```
-
-### 2. Access the Application
-Open your browser and navigate to:
-- **Frontend (Nginx):** [http://localhost:8081](http://localhost:8081)
-- **API (FastAPI docs):** [http://localhost:8080/docs](http://localhost:8080/docs) (Direct FastAPI container exposure is disabled by default in Compose; if you want to access the FastAPI container directly, expose its port or navigate to the Swagger docs at the proxy port if routes are configured).
-
-### 3. Database Persistence
-Similar to Option A, the Python container mounts the host's `db.json` at `/app/backend/db.json`, ensuring your budgets are saved and shared across runs.
-
----
-
 ## Common Commands
 
 ### View Logs
