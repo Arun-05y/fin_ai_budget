@@ -1,0 +1,151 @@
+{
+  "users": [
+    {
+      "id": "1783178775686",
+      "username": "arun_test",
+      "password": "$2a$10$Zm3Hg2xj4Gaf2gLW.Q58OuwhA5RKWlvHVc99NQdiQDjHsZ6QVtLiy"
+    },
+    {
+      "id": "1783223317263",
+      "username": "testuser_1",
+      "password": "$2a$10$oWLhrgLBgijPkon4jeuEp.iEPyKN/L9eBnUK83UqFR0mvNaAoGdhm"
+    },
+    {
+      "id": "1783160754000",
+      "username": "arun y",
+      "password": "$2b$12$6v8HJlJ0lyKCQSkrHfx1a.fI69sPdW19j5kPN5gL0q4S1SrbLWRZu"
+    },
+    {
+      "id": "1783160813000",
+      "username": "Arun Y",
+      "password": "$2b$12$5zyd.J16YBS3yJbmkgxvQezNSq7XZX5KNL.BOD7XM6D97kW6dn2Se"
+    },
+    {
+      "username": "testuser",
+      "password": "$2b$12$DEYcZ1lwVsLyD536wlraXOED/lluiXxtVZyfalpvoxQPyb8mDhfXO",
+      "id": "1783227215000"
+    }
+  ],
+  "budgets": [
+    {
+      "userId": "1783178775686",
+      "currency": "₹",
+      "income": 100000,
+      "otherIncome": 0,
+      "expenses": {
+        "housing": 15000,
+        "food": 5000,
+        "transportation": 8000,
+        "utilities": 4000,
+        "healthcare": 1000,
+        "education": 5000,
+        "entertainment": 6000,
+        "shopping": 0,
+        "investments": 0,
+        "savings": 0,
+        "miscellaneous": 0
+      },
+      "debt": 10000,
+      "currentSavings": 0,
+      "savingsGoal": 10000,
+      "financialGoals": "house",
+      "updatedAt": "2026-07-04T15:26:15.737Z"
+    },
+    {
+      "userId": "1783223317263",
+      "currency": "₹",
+      "income": 60000,
+      "otherIncome": 5000,
+      "expenses": {
+        "housing": 15000,
+        "food": 8000,
+        "transportation": 4000,
+        "utilities": 3500,
+        "healthcare": 2000,
+        "education": 1500,
+        "entertainment": 5000,
+        "shopping": 4500,
+        "investments": 5000,
+        "savings": 10000,
+        "miscellaneous": 1500
+      },
+      "debt": 3000,
+      "currentSavings": 45000,
+      "savingsGoal": 15000,
+      "financialGoals": "Buy a new laptop (₹80k) & create an emergency fund",
+      "updatedAt": "2026-07-05T03:48:38.438Z"
+    },
+    {
+      "userId": "1783160754000",
+      "currency": "£",
+      "income": 100000.0,
+      "otherIncome": 0.0,
+      "expenses": {
+        "housing": 25000.0,
+        "food": 15000.0,
+        "transportation": 0.0,
+        "utilities": 6000.0,
+        "healthcare": 0.0,
+        "education": 0.0,
+        "entertainment": 6000.0,
+        "shopping": 0.0,
+        "investments": 0.0,
+        "savings": 0.0,
+        "miscellaneous": 0.0
+      },
+      "debt": 15000.0,
+      "currentSavings": 0.0,
+      "savingsGoal": 20.0,
+      "financialGoals": "Retirement Fund",
+      "updatedAt": "2026-07-04T10:25:54.650394"
+    },
+    {
+      "userId": "1783160813000",
+      "currency": "₹",
+      "income": 1000000.0,
+      "otherIncome": 0.0,
+      "expenses": {
+        "housing": 25000.0,
+        "food": 12000.0,
+        "transportation": 6000.0,
+        "utilities": 6000.0,
+        "healthcare": 7000.0,
+        "education": 50000.0,
+        "entertainment": 6000.0,
+        "shopping": 6000.0,
+        "investments": 0.0,
+        "savings": 0.0,
+        "miscellaneous": 0.0
+      },
+      "debt": 15000.0,
+      "currentSavings": 0.0,
+      "savingsGoal": 20000.0,
+      "financialGoals": "Travel Plan",
+      "updatedAt": "2026-07-04T11:02:54.321545"
+    },
+    {
+      "currency": "\u20b9",
+      "income": 50000.0,
+      "otherIncome": 0.0,
+      "expenses": {
+        "housing": 0.0,
+        "food": 0.0,
+        "transportation": 0.0,
+        "utilities": 0.0,
+        "healthcare": 0.0,
+        "education": 0.0,
+        "entertainment": 0.0,
+        "shopping": 0.0,
+        "investments": 0.0,
+        "savings": 0.0,
+        "miscellaneous": 0.0
+      },
+      "debt": 0.0,
+      "currentSavings": 0.0,
+      "savingsGoal": 0.0,
+      "financialGoals": "",
+      "updatedAt": "2026-07-05T04:55:50.990390",
+      "userId": "1783227215000"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+services:
+  # ==========================================
+  # OPTION A: Full-Stack Node.js (Express + UI)
+  # ==========================================
+  node-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: finai-node-app
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - ./db.json:/app/db.json
+    restart: unless-stopped
+
+  # ==========================================
+  # OPTION B: Split-Stack (FastAPI Backend)
+  # ==========================================
+  api-python:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: finai-python-api
+    expose:
+      - "8080"
+    env_file:
+      - .env
+    volumes:
+      - ./db.json:/app/db.json
+    restart: unless-stopped
+
+  # OPTION B: Split-Stack (Nginx Frontend + Proxy)
+  nginx-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: finai-nginx-frontend
+    ports:
+      - "8081:80"
+    volumes:
+      # Optional: bind mounts for local dev (reflect changes immediately without rebuilding)
+      - ./public:/usr/share/nginx/html:ro
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - api-python
+    restart: unless-stopped

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinAI – Personal Budget Planning Agent</title>
+  <meta name="description" content="Meet FinAI, your intelligent AI Budget Planning Assistant. Create personalized monthly and yearly budgets, get smart financial insights, and track savings goals.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Styling -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+  <!-- Dedicated Authentication Screen -->
+  <div id="login-container" class="login-container">
+    <div class="login-background">
+      <div class="glow-sphere bubble-1"></div>
+      <div class="glow-sphere bubble-2"></div>
+    </div>
+    
+    <div class="login-card">
+      <div class="login-brand">
+        <div class="brand-logo-large">
+          <i class="fa-solid fa-wallet"></i>
+        </div>
+        <h2>FinAI</h2>
+        <p>Intelligent AI Budget Planner</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-login-btn">Sign In</button>
+        <button class="auth-tab" id="tab-register-btn">Create Account</button>
+      </div>
+
+      <!-- Form -->
+      <form id="auth-form" class="auth-form">
+        <div class="form-group">
+          <label for="login-username">Username</label>
+          <div class="input-icon-wrapper">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="login-username" placeholder="Enter username..." required autocomplete="username">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <div class="input-icon-wrapper">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="login-password" placeholder="Enter password..." required autocomplete="current-password">
+            <button type="button" class="btn-toggle-password" id="btn-toggle-password" title="Toggle password visibility">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary btn-block" id="auth-submit-btn">
+            <span>Sign In</span> <i class="fa-solid fa-right-to-bracket"></i>
+          </button>
+        </div>
+      </form>
+
+      <div class="auth-divider">
+        <span>or</span>
+      </div>
+
+      <div class="auth-guest-action">
+        <button class="btn btn-secondary btn-block" id="btn-guest-mode">
+          <span>Continue as Guest (Local Mode)</span> <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
+      <div class="auth-features-preview">
+        <div class="feature-item">
+          <i class="fa-solid fa-brain"></i>
+          <span>AI Insights</span>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Interactive Sheets</span>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-cloud"></i>
+          <span>Cloud Sync</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-container">
+    
+    <!-- Sidebar / Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo">
+          <i class="fa-solid fa-wallet-gradient fa-wallet"></i>
+        </div>
+        <div class="brand-info">
+          <h2>FinAI</h2>
+          <span>Budget Agent v1.0</span>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="active" data-tab="assistant">
+            <i class="fa-solid fa-comments"></i>
+            <span>AI Assistant</span>
+          </li>
+          <li data-tab="dashboard">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Dashboard</span>
+          </li>
+          <li data-tab="planner">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Budget Sheet</span>
+          </li>
+          <li data-tab="tips">
+            <i class="fa-solid fa-lightbulb"></i>
+            <span>Financial Tips</span>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div id="auth-unlogged" class="auth-box" style="padding: 0.25rem 0; text-align: center;">
+          <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.6rem;">Cloud Sync Off</p>
+          <button class="btn btn-secondary" id="sidebar-btn-sync" style="width: 100%; justify-content: center; font-size: 0.75rem; padding: 0.45rem 0.75rem; border-radius: 6px; font-weight: 600;">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Sync with Cloud
+          </button>
+        </div>
+        <div id="auth-logged" class="user-profile" style="display: none; align-items: center; width: 100%;">
+          <div class="avatar" style="background-color: rgba(0, 230, 118, 0.1); border: 1px solid rgba(0, 230, 118, 0.2);">
+            <i class="fa-solid fa-user-shield" style="color: var(--color-income);"></i>
+          </div>
+          <div class="user-info" style="flex: 1; margin-left: 0.5rem;">
+            <h4 id="logged-username" style="font-size: 0.85rem; font-weight: 600;">User</h4>
+            <span style="color: var(--color-income); font-size: 0.7rem; font-weight: 600;">Plan Synced <i class="fa-solid fa-cloud-arrow-up"></i></span>
+          </div>
+          <button id="btn-logout" title="Logout" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 1rem; padding: 0.25rem; transition: var(--transition);">
+            <i class="fa-solid fa-right-from-bracket" style="transition: var(--transition);"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <div class="header-title">
+          <h1 id="page-title">AI Budget Planner</h1>
+          <p id="page-subtitle">Conversational financial planning powered by AI</p>
+        </div>
+        <div class="header-actions">
+          <div class="currency-selector">
+            <label for="currency">Currency:</label>
+            <select id="currency">
+              <option value="₹">INR (₹)</option>
+              <option value="$">USD ($)</option>
+              <option value="€">EUR (€)</option>
+              <option value="£">GBP (£)</option>
+            </select>
+          </div>
+          <button class="btn btn-secondary" id="reset-btn">
+            <i class="fa-solid fa-rotate-right"></i> Reset Plan
+          </button>
+        </div>
+      </header>
+
+      <!-- Panel Wrapper -->
+      <div class="panels-container">
+        
+        <!-- Left Panel: Chat Interface -->
+        <section class="panel chat-panel" id="chat-section">
+          <div class="panel-header">
+            <div class="agent-avatar">
+              <i class="fa-solid fa-robot"></i>
+              <span class="status-indicator online"></span>
+            </div>
+            <div class="agent-meta">
+              <h3>FinAI Budget Agent</h3>
+              <p>Online | Ready to assist</p>
+            </div>
+            <div class="step-badge" id="step-badge-ui">Step 1: Greeting</div>
+          </div>
+          
+          <div class="chat-messages" id="chat-messages">
+            <!-- Messages will be dynamically inserted here -->
+            <div class="message agent">
+              <div class="message-content">
+                <p>Hello! I'm your AI Budget Planning Assistant. I'll help you create a personalized budget and improve your financial planning.</p>
+                <span class="time">Just now</span>
+              </div>
+            </div>
+            <div class="message agent">
+              <div class="message-content">
+                <p>To begin, let's collect your income details. <strong>What is your total monthly income?</strong> (You can also include other income sources if any).</p>
+                <div class="quick-replies">
+                  <button class="quick-reply-btn" data-value="50000">₹50,000</button>
+                  <button class="quick-reply-btn" data-value="100000">₹1,00,000</button>
+                  <button class="quick-reply-btn" data-value="150000">₹1,50,000</button>
+                </div>
+                <span class="time">Just now</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="chat-input-area">
+            <div class="input-suggestions" id="input-suggestions" style="display:none;">
+              <!-- Dynamic suggestions -->
+            </div>
+            <form class="chat-form" id="chat-form">
+              <input type="text" id="chat-input" placeholder="Type your response here (e.g. 60000 or rent is 15000)..." autocomplete="off">
+              <button type="submit" class="btn btn-primary btn-icon" id="send-btn">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <!-- Right Panel: Visual Dashboard & Workings -->
+        <section class="panel dashboard-panel">
+          
+          <!-- Tab Contents -->
+          <div class="tab-content active" id="tab-assistant-content">
+            <div class="dashboard-grid">
+              
+              <!-- Core Metrics Card -->
+              <div class="dashboard-card summary-card span-all">
+                <div class="card-header">
+                  <h3>Financial Snapshot</h3>
+                  <span class="badge" id="data-status-badge">Awaiting Data</span>
+                </div>
+                <div class="metrics-grid">
+                  <div class="metric-box">
+                    <span class="metric-label">Total Monthly Income</span>
+                    <div class="metric-value income" id="display-income">—</div>
+                    <div class="metric-trend" id="display-other-income">Other Sources: —</div>
+                  </div>
+                  <div class="metric-box">
+                    <span class="metric-label">Total Monthly Expenses</span>
+                    <div class="metric-value expense" id="display-expenses">—</div>
+                    <div class="metric-trend" id="display-expense-percentage">Expenses Rate: —</div>
+                  </div>
+                  <div class="metric-box">
+                    <span class="metric-label">Remaining Balance</span>
+                    <div class="metric-value balance" id="display-balance">—</div>
+                    <div class="metric-trend" id="display-savings-rate">Savings Rate: —</div>
+                  </div>
+                </div>
+                
+                <!-- Setup Progress bar -->
+                <div class="setup-progress-container">
+                  <div class="setup-progress-label">
+                    <span>Profile Setup Completion</span>
+                    <span id="setup-percent">10%</span>
+                  </div>
+                  <div class="setup-progress-bar">
+                    <div class="setup-progress-fill" id="setup-progress-fill" style="width: 10%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Spending breakdown & visual chart -->
+              <div class="dashboard-card chart-card">
+                <div class="card-header">
+                  <h3>Expense Allocation</h3>
+                  <i class="fa-solid fa-chart-pie card-icon"></i>
+                </div>
+                <div class="chart-container">
+                  <div class="visual-chart-wrapper">
+                    <!-- SVG Circle Chart / Donut Chart -->
+                    <svg viewBox="0 0 100 100" class="donut-chart">
+                      <circle cx="50" cy="50" r="40" fill="transparent" stroke="#1d2030" stroke-width="10"></circle>
+                      <circle cx="50" cy="50" r="40" fill="transparent" stroke="url(#gradient-accent)" stroke-width="10" stroke-dasharray="251.2" stroke-dashoffset="251.2" class="donut-segment" id="donut-segment-fill"></circle>
+                      <defs>
+                        <linearGradient id="gradient-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#4facfe"></stop>
+                          <stop offset="100%" stop-color="#00f2fe"></stop>
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                    <div class="donut-center">
+                      <span id="donut-center-label">Expenses</span>
+                      <h4 id="donut-center-value">0%</h4>
+                    </div>
+                  </div>
+                  <div class="chart-legend" id="chart-legend">
+                    <p class="no-data-msg">No expense data logged yet. Converse with FinAI to populate details.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Goals & Projections Card -->
+              <div class="dashboard-card savings-goals-card">
+                <div class="card-header">
+                  <h3>Savings & Goals</h3>
+                  <i class="fa-solid fa-bullseye card-icon"></i>
+                </div>
+                <div class="goals-content">
+                  <div class="goal-item">
+                    <div class="goal-meta">
+                      <span class="goal-name">Target Savings Goal</span>
+                      <span class="goal-value" id="display-goal-value">—</span>
+                    </div>
+                    <div class="goal-progress-bar">
+                      <div class="goal-progress-fill" id="goal-progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="goal-status" id="display-goal-status">Goal timeline: Awaiting setup</div>
+                  </div>
+                  
+                  <div class="savings-projection-box">
+                    <h4>Savings Projection</h4>
+                    <div class="projection-row">
+                      <div class="projection-item">
+                        <span class="projection-label">Monthly Projection</span>
+                        <span class="projection-value" id="projected-monthly">—</span>
+                      </div>
+                      <div class="projection-item">
+                        <span class="projection-label">Yearly Projection</span>
+                        <span class="projection-value" id="projected-yearly">—</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recommendation & Smart Insights Card -->
+              <div class="dashboard-card recommendations-card span-all">
+                <div class="card-header">
+                  <h3>Smart Insights & Recommendations</h3>
+                  <div class="insight-badge">
+                    <i class="fa-solid fa-brain"></i> AI Engine Active
+                  </div>
+                </div>
+                <div class="recommendations-container" id="recommendations-list">
+                  <div class="empty-state">
+                    <i class="fa-solid fa-receipt"></i>
+                    <p>Provide your budget details to generate smart insights & tailored recommendations.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Budget Planner Sheet (Interactive table) -->
+              <div class="dashboard-card table-card span-all">
+                <div class="card-header">
+                  <h3>Interactive Budget Sheet</h3>
+                  <div class="table-actions">
+                    <span class="info-tooltip" title="You can double click cell amounts to manually tweak your actual spend once established.">
+                      <i class="fa-solid fa-circle-info"></i> Interactive
+                    </span>
+                  </div>
+                </div>
+                <div class="table-wrapper">
+                  <table class="budget-table" id="budget-table">
+                    <thead>
+                      <tr>
+                        <th>Expense Category</th>
+                        <th>Recommended %</th>
+                        <th>Suggested Budget</th>
+                        <th>Actual Expense</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="budget-table-body">
+                      <!-- Row items will go here -->
+                      <tr class="empty-row">
+                        <td colspan="5" style="text-align: center; padding: 2rem;">No data entries. Please talk to the agent or input income details above to generate a budget sheet.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Notification Banner -->
+  <div class="notification" id="notification">
+    <div class="notification-content">
+      <i class="fa-solid fa-circle-check" id="notification-icon"></i>
+      <span id="notification-message">Settings updated successfully!</span>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

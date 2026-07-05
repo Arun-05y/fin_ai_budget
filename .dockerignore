@@ -1,0 +1,14 @@
+node_modules
+npm-debug.log
+backend/venv
+backend/__pycache__
+backend/.pytest_cache
+*.pyc
+.git
+.gitignore
+.env
+.env.example
+docker-compose*.yml
+Dockerfile*
+README.md
+db.json
